@@ -9,7 +9,6 @@ function Canvas() {
   const { shapes, selectShape } = useShapes()
 
   useEffect(() => {
-    console.log(shapes.map((s) => s.type).join(' '))
     const ctx = canvasRef.current.getContext('2d')
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 
@@ -49,9 +48,12 @@ function Canvas() {
 // returns the shape that the mouse is over
 // will only retun 1 shape by desc order
 function getMouseOverShapeIndex(shapes, x, y) {
-  return shapes.reverse().findIndex((shape) => {
-    return new ShapeDrawer(shape).isMouseOver(x, y)
-  })
+  for (let index = shapes.length - 1; index >= 0; index--) {
+    if (new ShapeDrawer(shapes[index]).isMouseOver(x, y)) {
+      return index
+    }
+  }
+  return -1
 }
 
 export default Canvas
