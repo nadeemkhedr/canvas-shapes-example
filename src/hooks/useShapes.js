@@ -18,15 +18,21 @@ const ShapesProvider = ({ children }) => {
 
   const selectShape = (index, allowMultiSelect) => {
     const shapesCopy = [...shapes]
-    shapesCopy.forEach((shape, i) => {
-      // toggle selected shape
-      if (index === i) {
-        shape.isSelected = !shape.isSelected
-      } else if (!allowMultiSelect) {
-        // if allow multi is false then set all the other items to not selected
+    // if there is an index, then move selected item to last
+    // it would be on top in the canvas
+    let selectedShape = null
+    if (index >= 0) {
+      selectedShape = shapesCopy.splice(index, 1)[0]
+      selectedShape.isSelected = !selectedShape.isSelected
+    }
+    if (!allowMultiSelect) {
+      shapesCopy.forEach((shape) => {
         shape.isSelected = false
-      }
-    })
+      })
+    }
+    if (selectedShape) {
+      shapesCopy.push(selectedShape)
+    }
     setShapes(shapesCopy)
   }
 
