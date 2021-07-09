@@ -2,12 +2,13 @@ import {
   HOVER_COLOR,
   HOVER_THICKNESS,
   CLICK_THICKNESS,
+  CLICK_GAP,
   CLICK_COLOR,
-  BACKGROUND_COLOR,
 } from 'constants.js'
 /* 
 --- Rectangle Props ---
 const RectangleProps = {
+  type: 'rectangle',
   width: Number,
   height: Number,
   x: Number,
@@ -16,29 +17,19 @@ const RectangleProps = {
 }
 */
 
-function drawRectangleWithThickness(ctx, rect, color, thickness = 0) {
-  ctx.fillStyle = color
-  ctx.fillRect(
-    rect.x - thickness,
-    rect.y - thickness,
-    rect.width + thickness * 2,
-    rect.height + thickness * 2
-  )
+function draw(ctx, rect) {
+  ctx.fillStyle = rect.fill
+  ctx.fillRect(rect.x, rect.y, rect.width, rect.height)
 }
 
-function draw(ctx, rect, isHover, isClicked) {
-  if (isClicked) {
-    // draw the outline for the clicked
-    drawRectangleWithThickness(ctx, rect, CLICK_COLOR, CLICK_THICKNESS)
-    // white padding for the outline
-    drawRectangleWithThickness(ctx, rect, BACKGROUND_COLOR, HOVER_THICKNESS)
-  }
+function drawHover(ctx, rect) {
+  ctx.globalAlpha = 0.7
+  drawRectangleOutline(ctx, rect, HOVER_COLOR, HOVER_THICKNESS, 0)
+  ctx.globalAlpha = 1
+}
 
-  if (isHover) {
-    drawRectangleWithThickness(ctx, rect, HOVER_COLOR, HOVER_THICKNESS)
-  }
-
-  drawRectangleWithThickness(ctx, rect, rect.fill)
+function drawSelectOutline(ctx, rect) {
+  drawRectangleOutline(ctx, rect, CLICK_COLOR, CLICK_THICKNESS, CLICK_GAP)
 }
 
 function isMouseOver(rect, x, y) {
@@ -50,8 +41,22 @@ function isMouseOver(rect, x, y) {
   )
 }
 
+// TODO: figure out why I need to add 5px to align the outline perfectly with the shape
+function drawRectangleOutline(ctx, rect, color, thickness, gap) {
+  ctx.lineWidth = thickness
+  ctx.strokeStyle = color
+  ctx.strokeRect(
+    rect.x - thickness - gap + 5,
+    rect.y - thickness - gap + 5,
+    rect.width + (thickness + gap) * 2 - 10,
+    rect.height + (thickness + gap) * 2 - 10
+  )
+}
+
 const rectangle = {
   draw,
+  drawHover,
+  drawSelectOutline,
   isMouseOver,
 }
 export default rectangle

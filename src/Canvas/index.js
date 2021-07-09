@@ -12,15 +12,27 @@ function Canvas() {
     const ctx = canvasRef.current.getContext('2d')
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 
+    // draw all shapes
+    shapes.forEach((shape) => {
+      new ShapeDrawer(shape).draw(ctx)
+    })
+
+    // after drawing all shapes the hover should be on top to show outline for all shapes
     const hoveredShapeIndex = getMouseOverShapeIndex(
       shapes,
       mouseLoc.x,
       mouseLoc.y
     )
-    shapes.forEach((shape, i) => {
-      const isHover = i === hoveredShapeIndex
-      new ShapeDrawer(shape).draw(ctx, isHover)
-    })
+    if (hoveredShapeIndex >= 0) {
+      new ShapeDrawer(shapes[hoveredShapeIndex]).drawHover(ctx)
+    }
+
+    // selected outline is on top to indicate the selected shapes
+    shapes
+      .filter((shape) => shape.isSelected)
+      .forEach((shape) => {
+        new ShapeDrawer(shape).drawSelectOutline(ctx)
+      })
   })
 
   const handleMove = (e) => {

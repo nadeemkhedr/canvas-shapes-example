@@ -17,13 +17,16 @@ class ShapeDrawer {
     this.shapeProps = shapeProps
   }
 
-  draw(ctx, isHover) {
-    this.shapeFunctions.draw(
-      ctx,
-      this.shapeProps,
-      isHover,
-      this.shapeProps.isSelected
-    )
+  draw(ctx) {
+    this.shapeFunctions.draw(ctx, this.shapeProps, this.shapeProps.isSelected)
+  }
+
+  drawHover(ctx) {
+    this.shapeFunctions.drawHover(ctx, this.shapeProps)
+  }
+
+  drawSelectOutline(ctx) {
+    this.shapeFunctions.drawSelectOutline(ctx, this.shapeProps)
   }
 
   isMouseOver(x, y) {
