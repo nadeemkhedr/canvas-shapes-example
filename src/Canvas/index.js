@@ -1,81 +1,36 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../constants'
-import Shape from 'Shape'
+import ShapeDrawer from './ShapeDrawer'
+import useShapes from 'hooks/useShapes'
 
 function Canvas() {
   const canvasRef = useRef(null)
+  const [mouseLoc, setMouseLoc] = useState({ x: null, y: null })
+  const { shapes } = useShapes()
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    canvas.width = CANVAS_WIDTH
-    canvas.height = CANVAS_HEIGHT
-
-    const ctx = canvas.getContext('2d')
-
-    const custom = new Shape(
-      'rectangle',
-      {
-        x: 100,
-        y: 100,
-        width: 100,
-        height: 100,
-        fill: 'black',
-      },
-      ctx
-    )
-
-    const customCircle = new Shape(
-      'circle',
-      {
-        x: 300,
-        y: 300,
-        radius: 50,
-        fill: 'black',
-      },
-      ctx
-    )
-
-    custom.draw()
-    customCircle.draw()
-  }, [])
+    const ctx = canvasRef.current.getContext('2d')
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+    shapes.forEach((shape) => {
+      const shapeDr = new ShapeDrawer(shape, ctx)
+      const isHover = shapeDr.isMouseOver(mouseLoc.x, mouseLoc.y)
+      shapeDr.draw(isHover)
+    })
+  })
 
   const handleMove = (e) => {
     const { offsetX, offsetY } = e.nativeEvent
-
-    const ctx = canvasRef.current.getContext('2d')
-    // clear and redraw
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-    const custom = new Shape(
-      'rectangle',
-      {
-        x: 100,
-        y: 100,
-        width: 100,
-        height: 100,
-        fill: 'black',
-      },
-      ctx
-    )
-
-    const customCircle = new Shape(
-      'circle',
-      {
-        x: 300,
-        y: 300,
-        radius: 50,
-        fill: 'black',
-      },
-      ctx
-    )
-
-    const isCustomHover = custom.isMouseOver(offsetX, offsetY)
-    custom.draw(isCustomHover)
-
-    const isCustomCircleHover = customCircle.isMouseOver(offsetX, offsetY)
-    customCircle.draw(isCustomCircleHover)
+    setMouseLoc({ x: offsetX, y: offsetY })
   }
 
-  return <canvas ref={canvasRef} onMouseMove={handleMove} />
+  return (
+    <canvas
+      ref={canvasRef}
+      onMouseMove={handleMove}
+      width={CANVAS_WIDTH}
+      height={CANVAS_HEIGHT}
+    />
+  )
 }
 
 export default Canvas

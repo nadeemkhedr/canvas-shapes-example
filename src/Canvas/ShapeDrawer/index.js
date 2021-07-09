@@ -1,10 +1,9 @@
 import rectangle from './shapes/rectangle'
 import circle from './shapes/circle'
 
-class Shape {
-  constructor(shapeType, shapeProps, canvasContext) {
-    this.shapeType = shapeType
-    switch (shapeType) {
+class ShapeDrawer {
+  constructor(shapeProps, canvasContext) {
+    switch (shapeProps.type) {
       case 'rectangle':
         this.shapeFunctions = rectangle
         break
@@ -15,19 +14,21 @@ class Shape {
         throw new Error('Unsupported shape')
     }
 
-    this.isSelected = false
     this.shapeProps = shapeProps
     this.ctx = canvasContext
   }
 
-  draw(isHover, isClicked) {
-    this.shapeFunctions.draw(this.ctx, this.shapeProps, isHover, isClicked)
+  draw(isHover) {
+    this.shapeFunctions.draw(
+      this.ctx,
+      this.shapeProps,
+      isHover,
+      this.shapeProps.isSelected
+    )
   }
 
   isMouseOver(x, y) {
     return this.shapeFunctions.isMouseOver(this.shapeProps, x, y)
   }
-
-  toggleClick() {}
 }
-export default Shape
+export default ShapeDrawer

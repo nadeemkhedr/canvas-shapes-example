@@ -4,7 +4,7 @@ import {
   CLICK_THICKNESS,
   CLICK_COLOR,
   BACKGROUND_COLOR,
-} from '../../constants'
+} from 'constants.js'
 /* 
 --- Circle Props ---
 const CircleProps = {
