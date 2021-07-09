@@ -2,7 +2,7 @@ import rectangle from './shapes/rectangle'
 import circle from './shapes/circle'
 
 class ShapeDrawer {
-  constructor(shapeProps, canvasContext) {
+  constructor(shapeProps) {
     switch (shapeProps.type) {
       case 'rectangle':
         this.shapeFunctions = rectangle
@@ -15,12 +15,11 @@ class ShapeDrawer {
     }
 
     this.shapeProps = shapeProps
-    this.ctx = canvasContext
   }
 
-  draw(isHover) {
+  draw(ctx, isHover) {
     this.shapeFunctions.draw(
-      this.ctx,
+      ctx,
       this.shapeProps,
       isHover,
       this.shapeProps.isSelected

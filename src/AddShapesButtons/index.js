@@ -5,8 +5,8 @@ function AddShapesButtons() {
 
   const addCircle = () => {
     addShape('circle', {
-      x: 300,
-      y: 300,
+      x: Math.floor(Math.random() * 500),
+      y: Math.floor(Math.random() * 500),
       radius: 50,
       fill: 'black',
     })
@@ -14,8 +14,8 @@ function AddShapesButtons() {
 
   const addRectangle = () => {
     addShape('rectangle', {
-      x: 100,
-      y: 100,
+      x: Math.floor(Math.random() * 500),
+      y: Math.floor(Math.random() * 500),
       width: 100,
       height: 100,
       fill: 'black',
