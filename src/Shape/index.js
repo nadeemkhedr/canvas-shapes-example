@@ -23,5 +23,11 @@ class Shape {
   draw(isHover, isClicked) {
     this.shapeFunctions.draw(this.ctx, this.shapeProps, isHover, isClicked)
   }
+
+  isMouseOver(x, y) {
+    return this.shapeFunctions.isMouseOver(this.shapeProps, x, y)
+  }
+
+  toggleClick() {}
 }
 export default Shape

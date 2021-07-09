@@ -37,7 +37,16 @@ function draw(ctx, circle, isHover, isClicked) {
   drawCircleWithThickness(ctx, circle, circle.fill)
 }
 
+function isMouseOver(circle, x, y) {
+  return (
+    Math.round(
+      Math.sqrt(Math.pow(x - circle.x, 2) + Math.pow(y - circle.y, 2))
+    ) <= circle.radius
+  )
+}
+
 const circle = {
   draw,
+  isMouseOver,
 }
 export default circle

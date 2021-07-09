@@ -41,7 +41,17 @@ function draw(ctx, rect, isHover, isClicked) {
   drawRectangleWithThickness(ctx, rect, rect.fill)
 }
 
+function isMouseOver(rect, x, y) {
+  return (
+    x >= rect.x &&
+    x <= rect.x + rect.width &&
+    y >= rect.y &&
+    y <= rect.y + rect.height
+  )
+}
+
 const rectangle = {
   draw,
+  isMouseOver,
 }
 export default rectangle
