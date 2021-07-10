@@ -36,10 +36,21 @@ const ShapesProvider = ({ children }) => {
     setShapes(shapesCopy)
   }
 
+  const moveSelectedShapes = (dx, dy) => {
+    const shapesCopy = [...shapes]
+    shapesCopy
+      .filter((shape) => shape.isSelected)
+      .forEach((shape) => {
+        shape.x += dx
+        shape.y += dy
+      })
+  }
+
   const shapesContext = {
     shapes,
     addShape,
     selectShape,
+    moveSelectedShapes,
   }
 
   return (
