@@ -1,12 +1,21 @@
-.trashButton {
-}
-
 .shapeType {
   text-transform: capitalize;
 }
+
+.container {
+  margin-bottom: 30px;
+}
+
 .group {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.group > * {
+  justify-self: center;
+}
+
+.trashButton {
+  width: 100%;
 }
 
 /* tash icon */

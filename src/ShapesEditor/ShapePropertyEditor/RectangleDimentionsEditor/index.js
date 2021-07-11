@@ -1,6 +1,6 @@
 function RectangleDimentionsEditor({ index, shape, onChange, groupClass }) {
   return (
-    <div>
+    <>
       <div className={groupClass}>
         <label htmlFor={`width-${index}`}>width</label>
         <input
@@ -37,7 +37,7 @@ function RectangleDimentionsEditor({ index, shape, onChange, groupClass }) {
           }}
         />
       </div>
-    </div>
+    </>
   )
 }
 
