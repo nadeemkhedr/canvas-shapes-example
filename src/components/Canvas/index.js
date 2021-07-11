@@ -2,17 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from 'constants.js'
 import ShapeDrawer from 'ShapeDrawer'
 import useShapes from 'hooks/useShapes'
+import useDraggableShapes from 'hooks/useDraggableShapes'
 
 function Canvas({ className }) {
   const canvasRef = useRef(null)
   const [mouseLoc, setMouseLoc] = useState({ x: null, y: null })
-  const [moveStatus, setMoveStatus] = useState({
-    status: null,
-    x: null,
-    y: null,
-  })
 
-  const { shapes, selectShape, moveSelectedShapes } = useShapes()
+  const { shapes, selectShape } = useShapes()
+  const {
+    handleDragMouseDown,
+    handleDragMouseMove,
+    resetMoveStatus,
+    isMoving,
+  } = useDraggableShapes()
 
   useEffect(() => {
     const ctx = canvasRef.current.getContext('2d')
@@ -41,46 +43,17 @@ function Canvas({ className }) {
       })
   })
 
-  const handleDown = (e) => {
-    // only care if mouse down is on a selected shape
-    const { offsetX, offsetY } = e.nativeEvent
-    const isDownOverSelectedShape = shapes
-      .filter((shape) => shape.isSelected)
-      .some((shape) => new ShapeDrawer(shape).isMouseOver(offsetX, offsetY))
-
-    if (isDownOverSelectedShape) {
-      setMoveStatus({
-        status: 'DOWN_SELECTED',
-        x: offsetX,
-        y: offsetY,
-      })
-    }
-  }
-
   const handleMove = (e) => {
     const { offsetX, offsetY } = e.nativeEvent
-    if (moveStatus.status === 'DOWN_SELECTED' || moveStatus.status === 'MOVE') {
-      // get delta
-      const dx = offsetX - moveStatus.x
-      const dy = offsetY - moveStatus.y
-
-      moveSelectedShapes(dx, dy)
-
-      setMoveStatus({
-        status: 'MOVE',
-        x: offsetX,
-        y: offsetY,
-      })
-    }
-
     setMouseLoc({ x: offsetX, y: offsetY })
+    handleDragMouseMove(e)
   }
 
   const handleUp = (e) => {
     const { offsetX, offsetY } = e.nativeEvent
 
     // don't select/de-select anything if we moved a shape
-    if (moveStatus.status !== 'MOVE') {
+    if (!isMoving) {
       const selectedShapeIndex = getMouseOverShapeIndex(
         shapes,
         offsetX,
@@ -88,19 +61,14 @@ function Canvas({ className }) {
       )
       selectShape(selectedShapeIndex, e.shiftKey)
     }
-
-    setMoveStatus({
-      status: null,
-      x: null,
-      y: null,
-    })
+    resetMoveStatus()
   }
 
   return (
     <canvas
       className={className}
       ref={canvasRef}
-      onMouseDown={handleDown}
+      onMouseDown={handleDragMouseDown}
       onMouseUp={handleUp}
       onMouseMove={handleMove}
       width={CANVAS_WIDTH}
