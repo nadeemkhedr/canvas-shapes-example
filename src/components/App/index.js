@@ -1,6 +1,6 @@
 import { ShapesProvider } from 'hooks/useShapes'
 
-import AddShapesButtons from 'AddShapesButtons'
+import AddShapesButtons from '../AddShapesButtons'
 import Canvas from '../Canvas'
 import ShapesEditor from '../ShapesEditor'
 

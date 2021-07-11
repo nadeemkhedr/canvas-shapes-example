@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../constants'
+import { CANVAS_WIDTH, CANVAS_HEIGHT } from 'constants.js'
+import ShapeDrawer from 'ShapeDrawer'
 import useShapes from 'hooks/useShapes'
-
-import ShapeDrawer from './ShapeDrawer'
 
 function Canvas({ className }) {
   const canvasRef = useRef(null)
