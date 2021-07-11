@@ -1,9 +1,23 @@
+import { types } from 'constants.js'
 import CircleDimentionsEditor from './CircleDimentionEditor'
 import RectangleDimentionsEditor from './RectangleDimentionsEditor'
 
 import styles from './ShapePropertyEditor.module.css'
 
 function ShapePropertyEditor({ index, shape, onDelete, onChange }) {
+  let ShapeDimentionsEditor = null
+
+  switch (shape.type) {
+    case types.CIRCLE:
+      ShapeDimentionsEditor = CircleDimentionsEditor
+      break
+    case types.RECTANGLE:
+      ShapeDimentionsEditor = RectangleDimentionsEditor
+      break
+    default:
+      throw new Error('Unsupported shape in Editor')
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.group}>
@@ -31,21 +45,12 @@ function ShapePropertyEditor({ index, shape, onDelete, onChange }) {
         <div>{shape.y}</div>
       </div>
 
-      {shape.type === 'circle' ? (
-        <CircleDimentionsEditor
-          index={index}
-          shape={shape}
-          onChange={onChange}
-          groupClass={styles.group}
-        />
-      ) : (
-        <RectangleDimentionsEditor
-          index={index}
-          shape={shape}
-          onChange={onChange}
-          groupClass={styles.group}
-        />
-      )}
+      <ShapeDimentionsEditor
+        index={index}
+        shape={shape}
+        onChange={onChange}
+        groupClass={styles.group}
+      />
 
       <div className={styles.group}>
         <label htmlFor={`fill-${index}`}>color</label>

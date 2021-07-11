@@ -1,4 +1,4 @@
-import { DEFAULT_SHAPE_FILL } from 'constants.js'
+import { shapesProps, types } from 'constants.js'
 import useShapes from 'hooks/useShapes'
 import styles from './AddShapesButtons.module.css'
 
@@ -6,21 +6,21 @@ function AddShapesButtons() {
   const { addShape } = useShapes()
 
   const addCircle = () => {
-    addShape('circle', {
+    addShape(types.CIRCLE, {
       x: 200,
       y: 200,
       radius: 50,
-      fill: DEFAULT_SHAPE_FILL,
+      fill: shapesProps.DEFAULT_SHAPE_FILL,
     })
   }
 
   const addRectangle = () => {
-    addShape('rectangle', {
+    addShape(types.RECTANGLE, {
       x: 100,
       y: 100,
       width: 100,
       height: 100,
-      fill: DEFAULT_SHAPE_FILL,
+      fill: shapesProps.DEFAULT_SHAPE_FILL,
     })
   }
 

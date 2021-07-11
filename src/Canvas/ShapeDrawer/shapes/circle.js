@@ -1,10 +1,4 @@
-import {
-  HOVER_COLOR,
-  HOVER_THICKNESS,
-  CLICK_THICKNESS,
-  CLICK_GAP,
-  CLICK_COLOR,
-} from 'constants.js'
+import { shapesProps } from 'constants.js'
 /* 
 --- Circle Props ---
 const CircleProps = {
@@ -15,6 +9,14 @@ const CircleProps = {
   fill: String,
 }
 */
+
+const {
+  HOVER_COLOR,
+  HOVER_THICKNESS,
+  CLICK_THICKNESS,
+  CLICK_GAP,
+  CLICK_COLOR,
+} = shapesProps
 
 function draw(ctx, circle) {
   ctx.beginPath()

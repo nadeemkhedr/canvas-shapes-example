@@ -1,13 +1,14 @@
+import { types } from 'constants.js'
 import rectangle from './shapes/rectangle'
 import circle from './shapes/circle'
 
 class ShapeDrawer {
   constructor(shapeProps) {
     switch (shapeProps.type) {
-      case 'rectangle':
+      case types.RECTANGLE:
         this.shapeFunctions = rectangle
         break
-      case 'circle':
+      case types.CIRCLE:
         this.shapeFunctions = circle
         break
       default:

@@ -1,10 +1,4 @@
-import {
-  HOVER_COLOR,
-  HOVER_THICKNESS,
-  CLICK_THICKNESS,
-  CLICK_GAP,
-  CLICK_COLOR,
-} from 'constants.js'
+import { shapesProps } from 'constants.js'
 /* 
 --- Rectangle Props ---
 const RectangleProps = {
@@ -16,6 +10,14 @@ const RectangleProps = {
   fill: String,
 }
 */
+
+const {
+  HOVER_COLOR,
+  HOVER_THICKNESS,
+  CLICK_THICKNESS,
+  CLICK_GAP,
+  CLICK_COLOR,
+} = shapesProps
 
 function draw(ctx, rect) {
   const topLeftX = rect.x - rect.width / 2
