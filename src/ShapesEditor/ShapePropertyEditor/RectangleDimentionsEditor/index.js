@@ -14,7 +14,7 @@ function RectangleDimentionsEditor({ index, shape, onChange, groupClass }) {
             console.log(e.target.value)
             onChange({
               ...shape,
-              width: e.target.value,
+              width: parseInt(e.target.value, 10),
             })
           }}
         />
@@ -31,7 +31,7 @@ function RectangleDimentionsEditor({ index, shape, onChange, groupClass }) {
           onChange={(e) => {
             onChange({
               ...shape,
-              height: e.target.value,
+              height: parseInt(e.target.value, 10),
             })
           }}
         />

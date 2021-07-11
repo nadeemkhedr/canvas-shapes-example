@@ -13,7 +13,7 @@ function CircleDimentionsEditor({ index, shape, onChange, groupClass }) {
           onChange={(e) => {
             onChange({
               ...shape,
-              radius: e.target.value,
+              radius: parseInt(e.target.value, 10),
             })
           }}
         />
