@@ -18,8 +18,11 @@ const RectangleProps = {
 */
 
 function draw(ctx, rect) {
+  const topLeftX = rect.x - rect.width / 2
+  const topLeftY = rect.y - rect.height / 2
   ctx.fillStyle = rect.fill
-  ctx.fillRect(rect.x, rect.y, rect.width, rect.height)
+
+  ctx.fillRect(topLeftX, topLeftY, rect.width, rect.height)
 }
 
 function drawHover(ctx, rect) {
@@ -34,20 +37,23 @@ function drawSelectOutline(ctx, rect) {
 
 function isMouseOver(rect, x, y) {
   return (
-    x >= rect.x &&
-    x <= rect.x + rect.width &&
-    y >= rect.y &&
-    y <= rect.y + rect.height
+    x >= rect.x - rect.width / 2 &&
+    x <= rect.x + rect.width / 2 &&
+    y >= rect.y - rect.width / 2 &&
+    y <= rect.y + rect.height / 2
   )
 }
 
 // TODO: figure out why I need to add 5px to align the outline perfectly with the shape
 function drawRectangleOutline(ctx, rect, color, thickness, gap) {
+  const topLeftX = rect.x - rect.width / 2
+  const topLeftY = rect.y - rect.height / 2
+
   ctx.lineWidth = thickness
   ctx.strokeStyle = color
   ctx.strokeRect(
-    rect.x - thickness - gap + 5,
-    rect.y - thickness - gap + 5,
+    topLeftX - thickness - gap + 5,
+    topLeftY - thickness - gap + 5,
     rect.width + (thickness + gap) * 2 - 10,
     rect.height + (thickness + gap) * 2 - 10
   )

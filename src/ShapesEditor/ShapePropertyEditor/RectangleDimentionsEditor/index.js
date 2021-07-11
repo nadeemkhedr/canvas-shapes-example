@@ -7,11 +7,11 @@ function RectangleDimentionsEditor({ index, shape, onChange, groupClass }) {
           id={`width-${index}`}
           name={`width-${index}`}
           type="range"
+          step="2"
           min="10"
           max="200"
           value={shape.width}
           onChange={(e) => {
-            console.log(e.target.value)
             onChange({
               ...shape,
               width: parseInt(e.target.value, 10),
@@ -25,6 +25,7 @@ function RectangleDimentionsEditor({ index, shape, onChange, groupClass }) {
           id={`height-${index}`}
           name={`height-${index}`}
           type="range"
+          step="2"
           min="10"
           max="200"
           value={shape.height}
