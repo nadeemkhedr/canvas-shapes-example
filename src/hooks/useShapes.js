@@ -17,9 +17,12 @@ const ShapesProvider = ({ children }) => {
   }
 
   const selectShape = (index, allowMultiSelect) => {
-    const shapesCopy = [...shapes]
+    // deep clone the array (TODO use something like immer)
+    const shapesCopy = shapes.map((shape) => {
+      return { ...shape }
+    })
     // if there is an index, then move selected item to last
-    // it would be on top in the canvas
+    // so it would be on top in the canvas
     let selectedShape = null
     if (index >= 0) {
       selectedShape = shapesCopy.splice(index, 1)[0]
@@ -37,13 +40,17 @@ const ShapesProvider = ({ children }) => {
   }
 
   const moveSelectedShapes = (dx, dy) => {
-    const shapesCopy = [...shapes]
-    shapesCopy
-      .filter((shape) => shape.isSelected)
-      .forEach((shape) => {
-        shape.x += dx
-        shape.y += dy
-      })
+    const updatedShapes = shapes.map((shape) => {
+      if (shape.isSelected) {
+        return {
+          ...shape,
+          x: shape.x + dx,
+          y: shape.y + dy,
+        }
+      }
+      return shape
+    })
+    setShapes(updatedShapes)
   }
 
   const shapesContext = {
