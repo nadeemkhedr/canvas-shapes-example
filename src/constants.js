@@ -1,6 +1,6 @@
 export const CANVAS_HEIGHT = 500
 export const CANVAS_WIDTH = 500
-export const DEFAULT_SHAPE_COLOR = 'black'
+export const DEFAULT_SHAPE_FILL = '#000000'
 export const CLICK_COLOR = '#F1EB7E'
 export const HOVER_COLOR = '#D7D0FA'
 export const HOVER_THICKNESS = 10

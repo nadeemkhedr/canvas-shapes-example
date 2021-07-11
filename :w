@@ -1,0 +1,23 @@
+function RectangleDimentionsEditor({ index, shape, onChange, groupClass }) {
+  return (
+    <div>
+      <div className={styles.group}>
+        <label for={`fill-${index}`}>color</label>
+        <input
+          id={`width-${index}`}
+          name={`width-${index}`}
+          type="range"
+          value={shape.width}
+          onChange={(e) => {
+            onChange({
+              ...shape,
+              width: e.target.value,
+            })
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
+export default RectangleDimentionsEditor

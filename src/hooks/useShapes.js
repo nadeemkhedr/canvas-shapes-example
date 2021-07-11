@@ -16,6 +16,23 @@ const ShapesProvider = ({ children }) => {
     ])
   }
 
+  const updateShape = (index, updatedShape) => {
+    const updatedShapes = shapes.map((shape, i) => {
+      return i === index ? updatedShape : shape
+    })
+    setShapes(updatedShapes)
+  }
+
+  const deleteShape = (index) => {
+    const updatedShapes = []
+    shapes.forEach((shape, i) => {
+      if (i !== index) {
+        updatedShapes.push(shape)
+      }
+    })
+    setShapes(updatedShapes)
+  }
+
   const selectShape = (index, allowMultiSelect) => {
     // deep clone the array (TODO use something like immer)
     const shapesCopy = shapes.map((shape) => {
@@ -56,6 +73,8 @@ const ShapesProvider = ({ children }) => {
   const shapesContext = {
     shapes,
     addShape,
+    updateShape,
+    deleteShape,
     selectShape,
     moveSelectedShapes,
   }

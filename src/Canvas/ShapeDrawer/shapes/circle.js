@@ -18,7 +18,7 @@ const CircleProps = {
 
 function draw(ctx, circle) {
   ctx.beginPath()
-  ctx.fillStyle = circle.color
+  ctx.fillStyle = circle.fill
   ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI)
   ctx.fill()
 }

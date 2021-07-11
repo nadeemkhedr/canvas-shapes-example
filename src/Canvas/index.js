@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../constants'
-import ShapeDrawer from './ShapeDrawer'
 import useShapes from 'hooks/useShapes'
 
-function Canvas() {
+import ShapeDrawer from './ShapeDrawer'
+
+function Canvas({ className }) {
   const canvasRef = useRef(null)
   const [mouseLoc, setMouseLoc] = useState({ x: null, y: null })
   const [moveStatus, setMoveStatus] = useState({
@@ -98,6 +99,7 @@ function Canvas() {
 
   return (
     <canvas
+      className={className}
       ref={canvasRef}
       onMouseDown={handleDown}
       onMouseUp={handleUp}

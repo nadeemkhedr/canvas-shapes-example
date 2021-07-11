@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.canvas {
+  border: 2px solid black;
+}
+
+.shapesEditor {
+  width: 200px;
+}
