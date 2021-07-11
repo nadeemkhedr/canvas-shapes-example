@@ -2,6 +2,25 @@ import React, { useState, useContext } from 'react'
 
 const ShapesContext = React.createContext({})
 
+/* 
+--- Rectangle Props ---
+const RectangleProps = {
+  type: 'rectangle',
+  width: Number,
+  height: Number,
+  x: Number,
+  y: Number,
+  fill: String,
+}
+--- Circle Props ---
+const CircleProps = {
+  type: 'circle',
+  radius: Number,
+  x: Number,
+  y: Number,
+  fill: String,
+}
+*/
 const ShapesProvider = ({ children }) => {
   const [shapes, setShapes] = useState([])
 

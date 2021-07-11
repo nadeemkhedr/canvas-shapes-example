@@ -19,6 +19,7 @@ const {
   CLICK_COLOR,
 } = shapesProps
 
+// We want to draw from the center point
 function draw(ctx, rect) {
   const topLeftX = rect.x - rect.width / 2
   const topLeftY = rect.y - rect.height / 2
@@ -50,7 +51,6 @@ function isMouseOver(rect, x, y) {
 function drawRectangleOutline(ctx, rect, color, thickness, gap) {
   const topLeftX = rect.x - rect.width / 2
   const topLeftY = rect.y - rect.height / 2
-
   ctx.lineWidth = thickness
   ctx.strokeStyle = color
   ctx.strokeRect(

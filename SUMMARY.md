@@ -25,6 +25,18 @@ The goal is: if you want to put or modify anything on the canvas, anything in he
 
 This exposes the array of shapes using `useState` hook, and provides a context that is rendered in `components/App` so all components in the app can access `useShapes` data and actions
 
+This hooks exposes the following
+
+- `shapes` - array
+- `addShape(type, shape)`
+- `updateShape(index, shape)`
+- `deleteShape(index)`
+- `selectShape(index, allowMultiSelect)`
+  - `selectShape` also moves the selected shape to always be on top
+- `moveSelectedShapes(dx, dy)`
+
+This file also exposes `ShapeProvider` as a named import
+
 ## `components/Canvas`
 
 The main component, responsible for rendering the canvas and re-rendering things on change.
